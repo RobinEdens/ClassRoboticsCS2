@@ -22,8 +22,8 @@ public class ShortestPath {
 		int i = 0;
 		for (MovementInstruction mi : tstList)
 		{
-			test[i][0] = mi.getDistance()* Math.cos(mi.getDirection());
-			test[i][1] = mi.getDistance()* Math.sin(mi.getDirection());
+			test[i][0] = mi.getDistance()* Math.cos((mi.getDirection()*(Math.PI/180));
+			test[i][1] = mi.getDistance()* Math.sin(mi.getDirection()*(Math.PI/180));
 			System.out.println("(" + test[i][0] + ", " + test[i][1] + ")");
 			i++;
 		}
