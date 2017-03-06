@@ -15,20 +15,16 @@ public class ShortestPath {
 		MenuController menu = new MenuController();
 		menu.setInstructions(inst);
 		ArrayList<MovementInstruction> moveList = new ArrayList<MovementInstruction> (menu.Start());
-		Double [][] vectors = new Double[moveList.size()][2];
 		double finalDistance, finalAngle, combY = 0;	
 		double combX = 0;
-		int i = 0;
 		for (MovementInstruction mi : moveList)	{
-			vectors[i][0] = mi.getDistance()* Math.cos((mi.getDirection()*Math.PI)/180);
-			combX += vectors[i][0];
-			vectors[i][1] = mi.getDistance()* Math.sin((mi.getDirection()*Math.PI)/180);
-			combY += vectors[i][1];
-			i++;
+			combX +=  mi.getDistance()* Math.cos((mi.getDirection()*Math.PI)/180);
+			combY += mi.getDistance()* Math.sin((mi.getDirection()*Math.PI)/180);
 		}
 		finalDistance = Math.sqrt(Math.pow(combX, 2) + Math.pow(combY, 2));
 		finalAngle = (Math.atan2(combY, combX) * 180) / Math.PI;
 		MovementInstruction finalMove = new MovementInstruction(finalAngle, finalDistance);
+		System.out.println("Distance: " + finalDistance + ", Angle: " + finalAngle);
 		Button.ENTER.waitForPressAndRelease();
 		RobotMovement bot = new RobotMovement();
 		if (bot.isDiffPilotOk()) {
