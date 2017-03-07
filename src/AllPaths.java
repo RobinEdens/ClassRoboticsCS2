@@ -65,7 +65,7 @@ public class AllPaths {
 			System.out.println("(" + combX + ", " + combY + ")");
 			combX = 0; combY = 0;
 		}
-
+		
 		moveList.clear();
 		for (int i = 0; i < vectors.length; i++) {
 			double distance, angle;
@@ -76,10 +76,14 @@ public class AllPaths {
 				double x = vectors[i][0] - vectors[i-1][0];
 				double y = vectors[i][1] - vectors[i-1][1];
 				distance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-				angle = ((Math.atan2(y, x) * 180) / Math.PI) - lastAngle;
+				angle = ((Math.atan2(y, x) * 180) / Math.PI);
 			}
-			moveList.add(new MovementInstruction(angle, distance));
+			moveList.add(new MovementInstruction(angle - lastAngle, distance));
 			lastAngle = angle;
+		}
+		
+		for (MovementInstruction mi: moveList) {
+			System.out.println("Distance: " + mi.getDistance() + ", Angle: " + mi.getDirection());
 		}
 
 		RobotMovement bot = new RobotMovement();
